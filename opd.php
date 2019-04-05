@@ -35,13 +35,26 @@
     $le_n_c = $_POST['le_n_c'];
     $le_n_a = $_POST['le_n_a'];
 
-    $ot = $_POST['ot'];
-    $blood_sugar = $_POST['blood_sugar'];
-    $blood_pressure = $_POST['blood_pressure'];
-    $k1 = $_POST['k1'];
-    $k2 = $_POST['k2'];
-    $axial_length = $_POST['axial_length'];
-    $iol = $_POST['iol'];
+    if(isset($_POST['ot']))
+    {
+      $ot = $_POST['ot'];
+      $blood_sugar = $_POST['blood_sugar'];
+      $blood_pressure = $_POST['blood_pressure'];
+      $k1 = $_POST['k1'];
+      $k2 = $_POST['k2'];
+      $axial_length = $_POST['axial_length'];
+      $iol = $_POST['iol'];
+    }
+    else
+    {
+      $ot = "";
+      $blood_sugar = "";
+      $blood_pressure = "";
+      $k1 = "";
+      $k2 = "";
+      $axial_length = "";
+      $iol = "";
+    }
 
 		$query = mysqli_query($con, "INSERT INTO opd_details(name, age, sex, address, datee, history, advice, re_vision, le_vision, re_tension, le_tension, re_sac, le_sac, re_d_s, re_d_c, re_d_a, re_n_s, re_n_c, re_n_a, le_d_s, le_d_c, le_d_a, le_n_s, le_n_c, le_n_a, ot, blood_sugar, blood_pressure, k1, k2, axial_length, iol) values ('$name', '$age', '$sex', '$address', '$datee', '$history', '$advice', '$re_vision', '$le_vision', '$re_tension', '$le_tension', '$re_sac', '$le_sac', '$re_d_s', '$re_d_c', '$re_d_a', '$re_n_s', '$re_n_c', '$re_n_a', '$le_d_s', '$le_d_c', '$le_d_a', '$le_n_s', '$le_n_c', '$le_n_a', '$ot', '$blood_sugar', '$blood_pressure', '$k1', '$k2', '$axial_length', '$iol')");
 		
@@ -130,7 +143,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Date
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="datee" class="date-picker form-control col-md-7 col-xs-12" name="datee" required="required" type="text">
+                        <input id="birthday" name="datee" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
                       </div>
                     </div>
 
@@ -268,12 +281,13 @@
 
                     <!-- OT -->
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> <input type="checkbox" name="ot" id="ot" value="ot" data-parsley-mincheck="2" class="flat" /> For OT Purpose 
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                        <input id="toggleElement" type="checkbox" name="ot" onchange="toggleStatus()" value="ot" />&nbsp;For OT Purpose 
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                       
+                      
 
-                        <div class="form-group">
+                      <div class="col-md-6 col-sm-6 col-xs-12" id="elementsToOperateOn">
+                        <div class="form-group" id="elementsToOperateOn">
                           <table class="table">
                             <tbody>
                               <tr>
@@ -316,6 +330,38 @@
                       </div>
                     </div>
                     <!-- End OT -->
+
+                    <!-- Prescription -->
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Prescription
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th colspan="4" align="center">Medicine</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <input type="text" id="name" name="name" required="required" class="form-control col-md-4 col-xs-4" placeholder="Name">
+                              </td>
+                              <td>
+                                <input type="text" id="time" name="time" required="required" class="form-control col-md-4 col-xs-4" placeholder="Time">
+                              </td>
+                              <td>
+                                <input type="text" id="duration" name="duration" required="required" class="form-control col-md-4 col-xs-4" placeholder="Duration">
+                              </td>
+                              <td>
+                                <input type="text" id="pills" name="pills" required="required" class="form-control col-md-4 col-xs-4" placeholder="Pills">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- End Prescription -->
 
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -362,6 +408,42 @@
               </div>
             </div>
           </div>
+
+          <script type="text/javascript">
+            $(document).ready(function() {
+              $('#birthday').daterangepicker({
+                singleDatePicker: true,
+                calender_style: "picker_4"
+              }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+              });
+            });
+          </script>
+
+
+          <script type="text/javascript">
+            $('#elementsToOperateOn :input').attr('disabled', true);
+            
+            $(document).ready(function() {
+ 
+              handleStatusChanged();
+              
+            });
+
+            function handleStatusChanged() {
+                $('#toggleElement').on('change', function () {
+                  toggleStatus();   
+                });
+            }
+
+            function toggleStatus() {
+                if ($('#toggleElement').is(':checked')) {
+                    $('#elementsToOperateOn :input').removeAttr('disabled');
+                } else {
+                  $('#elementsToOperateOn :input').attr('disabled', true);  
+                }   
+            }
+          </script>
 
           <!-- <script type="text/javascript">
             $(document).ready(function() {

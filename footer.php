@@ -44,6 +44,6 @@
   <script type="text/javascript" src="js/flot/jquery.flot.spline.js"></script>
   <script type="text/javascript" src="js/flot/jquery.flot.stack.js"></script>
   <script type="text/javascript" src="js/flot/curvedLines.js"></script>
-  <script type="text/javascript" src="js/flot/jquery.flot.resize.js"></script>
+  <!-- <script type="text/javascript" src="js/flot/jquery.flot.resize.js"></script> -->
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>

@@ -10,9 +10,10 @@ if(isset($_POST['submit']))
   {
     if(mysqli_num_rows($query)>0)
     {
+      $row = mysqli_fetch_array($query);
       session_start();
-      $_SESSION['email']=$row[1];
-      $_SESSION['name']=$row[3];
+      $_SESSION['email']=$row['email'];
+      $_SESSION['name']=$row['name'];
       header("location:home.php");
     }
     else
@@ -132,7 +133,7 @@ if(isset($_POST['submit']))
               <input type="password" class="form-control" placeholder="Password" required="" />
             </div>
             <div>
-              <a class="btn btn-default submit" href="index.html">Submit</a>
+              <!-- <a class="btn btn-default submit" href="index.html">Submit</a> -->
             </div>
             <div class="clearfix"></div>
             <div class="separator">

@@ -70,6 +70,30 @@
 
 ?>
 
+<script>
+  $(function() {
+    $( "#history" ).autocomplete({
+      source: 'search.php?history=1'
+    });
+  });
+
+  $(function() {
+    $( "#medicine" ).autocomplete({
+      source: 'search.php?medicine=1'
+    });
+  });
+
+  $(function() {
+    $( "#eye_drops" ).autocomplete({
+      source: 'search.php?eye_drops=1'
+    });
+  });
+</script>
+
+<link rel="stylesheet" href="css/jquery-ui.css">
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/jquery-ui.js"></script> 
+
 
 
 
@@ -151,7 +175,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cheif Complaint History
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <textarea class="form-control" name="history" rows="3"></textarea>
+                        <textarea class="form-control" id="history" name="history" rows="3"></textarea>
                       </div>
                     </div>
 
@@ -345,7 +369,7 @@
                           <tbody>
                             <tr>
                               <td>
-                                <input type="text" id="name" name="name" required="required" class="form-control col-md-4 col-xs-4" placeholder="Name">
+                                <input type="text" id="medicine" name="name" required="required" class="form-control col-md-4 col-xs-4" placeholder="Name">
                               </td>
                               <td>
                                 <input type="text" id="time" name="time" required="required" class="form-control col-md-4 col-xs-4" placeholder="Time">

@@ -2,7 +2,6 @@
   include("header.php");
 ?>
 
-
       <!-- page content -->
       <div class="right_col" role="main">
 
@@ -10,50 +9,33 @@
         <div class="">
 
           <div class="row top_tiles">
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-caret-square-o-right"></i>
-                </div>
-                <div class="count">179</div>
-
-                <h3>New Sign ups</h3>
-                <p>Lorem ipsum psdea itgum rixt.</p>
-              </div>
-            </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-comments-o"></i>
-                </div>
-                <div class="count">179</div>
-
-                <h3>New Sign ups</h3>
-                <p>Lorem ipsum psdea itgum rixt.</p>
-              </div>
-            </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-sort-amount-desc"></i>
-                </div>
-                <div class="count">179</div>
-
-                <h3>New Sign ups</h3>
-                <p>Lorem ipsum psdea itgum rixt.</p>
-              </div>
-            </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <div class="tile-stats">
                 <div class="icon"><i class="fa fa-check-square-o"></i>
                 </div>
-                <div class="count">179</div>
-
-                <h3>New Sign ups</h3>
-                <p>Lorem ipsum psdea itgum rixt.</p>
+                <p><?php $d = date("d/m/Y"); echo $d ?></p><p></p>
+                <h3>Total OPD</h3>
+                <?php
+                  $query = mysqli_query($con,"select count(*) from opd_details where datee='$d' ");
+                  $data = mysqli_fetch_array($query);
+                  echo "<div class='count'>$data[0]</div>";
+                ?>
               </div>
             </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <div class="tile-stats">
+                <div class="icon"><i class="fa fa-check-square-o"></i>
+                </div>
+                <p><?php $d = date("d/m/Y"); echo $d ?></p><p></p>
+                <h3>Total OT</h3>
+                <?php
+                  $query = mysqli_query($con,"select count(*) from opd_details where ot='ot' and datee='$d' ");
+                  $data = mysqli_fetch_array($query);
+                  echo "<div class='count'>$data[0]</div>";
+                ?>
+              </div>
+            </div> 
           </div>
-
-
-
         </div>
 
 

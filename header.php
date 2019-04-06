@@ -62,7 +62,7 @@ if($email=="")
         <div class="left_col scroll-view">
 
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Adarsh Eye Hospital</span></a>
+            <a href="index.html" class="site_title"><span>Adarsh Eye Hospital</span></a>
           </div>
           <div class="clearfix"></div>
 
@@ -101,7 +101,7 @@ if($email=="")
                 </li>
                 <li><a href="opd.php"><i class="fa fa-edit"></i>OPD Form </a>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                <!-- <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="form.html">General Form</a>
                     </li>
@@ -196,7 +196,7 @@ if($email=="")
                   </ul>
                 </li>
                 <li><a><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a>
-                </li>
+                </li> -->
               </ul>
             </div>
 
@@ -254,7 +254,7 @@ if($email=="")
                 </ul>
               </li>
 
-              <li role="presentation" class="dropdown">
+             <!--  <li role="presentation" class="dropdown">
                 <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                   <i class="fa fa-envelope-o"></i>
                   <span class="badge bg-green">6</span>
@@ -325,7 +325,7 @@ if($email=="")
                     </div>
                   </li>
                 </ul>
-              </li>
+              </li> -->
 
             </ul>
           </nav>

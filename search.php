@@ -1,7 +1,6 @@
 <?php
 include("config.php");
 
-
 	$searchTerm = $_GET['term'];
 	
 	if(isset($_GET['history']))
@@ -18,7 +17,6 @@ include("config.php");
 	{
 		$query = mysqli_query($con, "SELECT * FROM eye_drops WHERE name LIKE '%".$searchTerm."%' ORDER BY name ASC");
 	}
-
 
 	while ($row = $query->fetch_assoc()) {
 	    $data[] = $row['name'];

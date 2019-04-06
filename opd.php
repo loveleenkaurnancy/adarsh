@@ -35,6 +35,16 @@
     $le_n_c = $_POST['le_n_c'];
     $le_n_a = $_POST['le_n_a'];
 
+    $m_name = $_POST['m_name'];
+    $m_time = $_POST['m_time'];
+    $m_duration = $_POST['m_duration'];
+    $m_pills = $_POST['m_pills'];
+
+    $e_name = $_POST['e_name'];
+    $e_time = $_POST['e_time'];
+    $e_duration = $_POST['e_duration'];
+    $e_drops = $_POST['e_drops'];
+
     if(isset($_POST['ot']))
     {
       $ot = $_POST['ot'];
@@ -60,6 +70,25 @@
 		
     if($query)
 		{
+      $q = mysqli_query($con, "SELECT * FROM opd_details order by id desc limit 1 ");
+      $data = mysqli_fetch_array($q);
+
+      for($i=0;$i<sizeof($m_name);$i++)
+      {
+        if(!($m_name[0] == ""))
+        {
+          mysqli_query($con, "INSERT INTO prescribed_medicine(opd_details_id, m_name, m_time, m_duration, m_pills) values ('$data[id]', '$m_name[$i]', '$m_time[$i]', '$m_duration[$i]', '$m_pills[$i]')");
+        }
+      }
+
+      for($i=0;$i<sizeof($e_name);$i++)
+      {
+        if(!($e_name[0] == ""))
+        {
+          mysqli_query($con, "INSERT INTO prescribed_eye_drops(opd_details_id, e_name, e_time, e_duration, e_drops) values ('$data[id]', '$e_name[$i]', '$e_time[$i]', '$e_duration[$i]', '$e_drops[$i]')");
+        }
+      }
+
 			$msg1 = "Submitted Successfully";
 		}
 		else
@@ -124,11 +153,45 @@
                   <br />
                   <form class="form-horizontal form-label-left" method="POST">
 
+                    <?php
+                      if(isset($msg1))
+                      {
+                    ?>
+                      <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                              </button>
+                              <strong></strong><?php echo $msg1 ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                        }
+                    ?>
+
+                    <?php
+                      if(isset($msg2))
+                      {
+                    ?>
+                      <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                              </button>
+                              <strong></strong><?php echo $msg2 ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                        }
+                    ?>
+
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Name <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="name" name="name"  class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
 
@@ -136,7 +199,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Age
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="age" name="age" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="age" name="age"  class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
 
@@ -146,10 +209,10 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <div id="gender" class="btn-group" data-toggle="buttons">
                           <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="sex" value="male"> &nbsp; Male &nbsp;
+                            <input type="radio" name="sex" value="male" required> &nbsp; Male &nbsp;
                           </label>
                           <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="sex" value="female" checked=""> Female
+                            <input type="radio" name="sex" value="female"> Female
                           </label>
                         </div>
                       </div>
@@ -167,7 +230,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Date
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="datee" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <input id="birthday" name="datee" class="date-picker form-control col-md-7 col-xs-12"  type="text">
                       </div>
                     </div>
 
@@ -197,28 +260,28 @@
                             <tr>
                               <th scope="row">Vision</th>
                               <td>
-                                <input type="text" id="re_vision" name="re_vision" required="required" class="form-control col-md-4 col-xs-4" placeholder="R/E">
+                                <input type="text" id="re_vision" name="re_vision"  class="form-control col-md-4 col-xs-4" placeholder="R/E">
                               </td>
                               <td>
-                                <input type="text" id="le_vision" name="le_vision" required="required" class="form-control col-md-4 col-xs-4" placeholder="L/E">
+                                <input type="text" id="le_vision" name="le_vision"  class="form-control col-md-4 col-xs-4" placeholder="L/E">
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">Tension</th>
                               <td>
-                                <input type="text" id="re_tension" name="re_tension" required="required" class="form-control col-md-4 col-xs-4" placeholder="R/E">
+                                <input type="text" id="re_tension" name="re_tension"  class="form-control col-md-4 col-xs-4" placeholder="R/E">
                               </td>
                               <td>
-                                <input type="text" id="le_tension" name="le_tension" required="required" class="form-control col-md-4 col-xs-4" placeholder="L/E">
+                                <input type="text" id="le_tension" name="le_tension"  class="form-control col-md-4 col-xs-4" placeholder="L/E">
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">SAC</th>
                               <td>
-                                <input type="text" id="re_sac" name="re_sac" required="required" class="form-control col-md-4 col-xs-4" placeholder="R/E">
+                                <input type="text" id="re_sac" name="re_sac"  class="form-control col-md-4 col-xs-4" placeholder="R/E">
                               </td>
                               <td>
-                                <input type="text" id="le_sac" name="le_sac" required="required" class="form-control col-md-4 col-xs-4" placeholder="L/E">
+                                <input type="text" id="le_sac" name="le_sac"  class="form-control col-md-4 col-xs-4" placeholder="L/E">
                               </td>
                             </tr>
                           </tbody>
@@ -242,25 +305,25 @@
                             <tr>
                               <th scope="row">Distance</th>
                               <td>
-                                <input type="text" id="r_d_s" name="re_d_s" required="required" class="form-control col-md-4 col-xs-4" placeholder="Sph">
+                                <input type="text" id="r_d_s" name="re_d_s"  class="form-control col-md-4 col-xs-4" placeholder="Sph">
                               </td>
                               <td>
-                                <input type="text" id="r_d_c" name="re_d_c" required="required" class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
+                                <input type="text" id="r_d_c" name="re_d_c"  class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
                               </td>
                               <td>
-                                <input type="text" id="r_d_a" name="re_d_a" required="required" class="form-control col-md-4 col-xs-4" placeholder="Axis">
+                                <input type="text" id="r_d_a" name="re_d_a"  class="form-control col-md-4 col-xs-4" placeholder="Axis">
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">Near</th>
                               <td>
-                                <input type="text" id="r_n_s" name="re_n_s" required="required" class="form-control col-md-4 col-xs-4" placeholder="Sph">
+                                <input type="text" id="r_n_s" name="re_n_s"  class="form-control col-md-4 col-xs-4" placeholder="Sph">
                               </td>
                               <td>
-                                <input type="text" id="r_n_c" name="re_n_c" required="required" class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
+                                <input type="text" id="r_n_c" name="re_n_c"  class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
                               </td>
                               <td>
-                                <input type="text" id="r_n_a" name="re_n_a" required="required" class="form-control col-md-4 col-xs-4" placeholder="Axis">
+                                <input type="text" id="r_n_a" name="re_n_a"  class="form-control col-md-4 col-xs-4" placeholder="Axis">
                               </td>
                             </tr>
                           </tbody>
@@ -276,25 +339,25 @@
                             <tr>
                               <th scope="row">Distance</th>
                               <td>
-                                <input type="text" id="l_d_s" name="le_d_s" required="required" class="form-control col-md-4 col-xs-4" placeholder="Sph">
+                                <input type="text" id="l_d_s" name="le_d_s"  class="form-control col-md-4 col-xs-4" placeholder="Sph">
                               </td>
                               <td>
-                                <input type="text" id="l_d_c" name="le_d_c" required="required" class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
+                                <input type="text" id="l_d_c" name="le_d_c"  class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
                               </td>
                               <td>
-                                <input type="text" id="l_d_a" name="le_d_a" required="required" class="form-control col-md-4 col-xs-4" placeholder="Axis">
+                                <input type="text" id="l_d_a" name="le_d_a"  class="form-control col-md-4 col-xs-4" placeholder="Axis">
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">Near</th>
                               <td>
-                                <input type="text" id="l_n_s" name="le_n_s" required="required" class="form-control col-md-4 col-xs-4" placeholder="Sph">
+                                <input type="text" id="l_n_s" name="le_n_s"  class="form-control col-md-4 col-xs-4" placeholder="Sph">
                               </td>
                               <td>
-                                <input type="text" id="l_n_c" name="le_n_c" required="required" class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
+                                <input type="text" id="l_n_c" name="le_n_c"  class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
                               </td>
                               <td>
-                                <input type="text" id="l_n_a" name="le_n_a" required="required" class="form-control col-md-4 col-xs-4" placeholder="Axis">
+                                <input type="text" id="l_n_a" name="le_n_a"  class="form-control col-md-4 col-xs-4" placeholder="Axis">
                               </td>
                             </tr>
                           </tbody>
@@ -308,8 +371,6 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
                         <input id="toggleElement" type="checkbox" name="ot" onchange="toggleStatus()" value="ot" />&nbsp;For OT Purpose 
                       </label>
-                      
-
                       <div class="col-md-6 col-sm-6 col-xs-12" id="elementsToOperateOn">
                         <div class="form-group" id="elementsToOperateOn">
                           <table class="table">
@@ -317,35 +378,35 @@
                               <tr>
                                 <th scope="row">Blood Sugar</th>
                                 <td colspan="3">
-                                  <input type="text" id="blood_sugar" name="blood_sugar" required="required" class="form-control col-md-4 col-xs-4">
+                                  <input type="text" id="blood_sugar" name="blood_sugar"  class="form-control col-md-4 col-xs-4">
                                 </td>
                               </tr>
                               <tr>
                                 <th scope="row">Blood Pressure</th>
                                 <td colspan="3">
-                                  <input type="text" id="blood_pressure" name="blood_pressure" required="required" class="form-control col-md-4 col-xs-4">
+                                  <input type="text" id="blood_pressure" name="blood_pressure"  class="form-control col-md-4 col-xs-4">
                                 </td>
                               </tr>
                               <tr>
                                 <th scope="row">K1</th>
                                 <td>
-                                  <input type="text" id="k1" name="k1" required="required" class="form-control col-md-4 col-xs-4">
+                                  <input type="text" id="k1" name="k1"  class="form-control col-md-4 col-xs-4">
                                 </td>
                                 <th scope="row">K2</th>
                                 <td>
-                                  <input type="text" id="k2" name="k2" required="required" class="form-control col-md-4 col-xs-4">
+                                  <input type="text" id="k2" name="k2"  class="form-control col-md-4 col-xs-4">
                                 </td>
                               </tr>
                               <tr>
                                 <th scope="row">Axial Length</th>
                                 <td colspan="3">
-                                  <input type="text" id="axial_length" name="axial_length" required="required" class="form-control col-md-4 col-xs-4">
+                                  <input type="text" id="axial_length" name="axial_length"  class="form-control col-md-4 col-xs-4">
                                 </td>
                               </tr>
                               <tr>
                                 <th scope="row">IoL1</th>
                                 <td colspan="3">
-                                  <input type="text" id="iol" name="iol" required="required" class="form-control col-md-4 col-xs-4">
+                                  <input type="text" id="iol" name="iol"  class="form-control col-md-4 col-xs-4">
                                 </td>
                               </tr>
                             </tbody>
@@ -355,12 +416,12 @@
                     </div>
                     <!-- End OT -->
 
-                    <!-- Prescription -->
+                    <!-- Prescription Medicine -->
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Prescription
-                      </label>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                      Prescription</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <table class="table">
+                        <table class="table" id="dynamic_field">
                           <thead>
                             <tr>
                               <th colspan="4" align="center">Medicine</th>
@@ -369,16 +430,19 @@
                           <tbody>
                             <tr>
                               <td>
-                                <input type="text" id="medicine" name="name" required="required" class="form-control col-md-4 col-xs-4" placeholder="Name">
+                                <input type="text" id="medicine" name="m_name[]"  class="form-control col-md-4 col-xs-4" placeholder="Name">
                               </td>
                               <td>
-                                <input type="text" id="time" name="time" required="required" class="form-control col-md-4 col-xs-4" placeholder="Time">
+                                <input type="text" id="time" name="m_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Time">
                               </td>
                               <td>
-                                <input type="text" id="duration" name="duration" required="required" class="form-control col-md-4 col-xs-4" placeholder="Duration">
+                                <input type="text" id="duration" name="m_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration">
                               </td>
                               <td>
-                                <input type="text" id="pills" name="pills" required="required" class="form-control col-md-4 col-xs-4" placeholder="Pills">
+                                <input type="text" id="pills" name="m_pills[]"  class="form-control col-md-4 col-xs-4" placeholder="Pills">
+                              </td>
+                              <td>
+                                <button type="button" name="add" id="add" class="btn btn-success">Add More</button>
                               </td>
                             </tr>
                           </tbody>
@@ -387,46 +451,46 @@
                     </div>
                     <!-- End Prescription -->
 
+                    <!-- Prescription Eye Drops -->
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <table class="table" id="dynamic_field2">
+                          <thead>
+                            <tr>
+                              <th colspan="4" align="center">Eye Drops</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <input type="text" id="eye_drops" name="e_name[]"  class="form-control col-md-4 col-xs-4" placeholder="Name">
+                              </td>
+                              <td>
+                                <input type="text" id="time" name="e_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Time">
+                              </td>
+                              <td>
+                                <input type="text" id="duration" name="e_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration">
+                              </td>
+                              <td>
+                                <input type="text" id="drops" name="e_drops[]"  class="form-control col-md-4 col-xs-4" placeholder="Drops">
+                              </td>
+                              <td>
+                                <button type="button" name="add2" id="add2" class="btn btn-success">Add More</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- End Eye Drops -->
+
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <button type="submit" name="submit" class="btn btn-success">Submit</button>
                       </div>
                     </div>
-
-			            <?php
-			        		if(isset($msg1))
-			        		{
-			      		?>
-			      			<div class="form-group">
-								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-			          				<div class="alert alert-success alert-dismissible fade in" role="alert">
-			            				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-			             				</button>
-			            				<strong></strong><?php echo $msg1 ?>
-			          				</div>
-			      				</div>
-			  				</div>
-			        	<?php
-			          		}
-			        	?>
-
-			        	<?php
-			        		if(isset($msg2))
-			        		{
-			      		?>
-			      			<div class="form-group">
-								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-			          				<div class="alert alert-danger alert-dismissible fade in" role="alert">
-			            				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-			             				</button>
-			            				<strong></strong><?php echo $msg2 ?>
-			          				</div>
-			      				</div>
-			  				</div>
-			        	<?php
-			          		}
-			        	?>
-
                   </form>
                 </div>
               </div>
@@ -468,6 +532,43 @@
                 }   
             }
           </script>
+
+          <!-- Add More Button Medicine -->
+          <script type="text/javascript">
+            $(document).ready(function(){   
+              var i=1;  
+
+              $('#add').click(function(){  
+                   i++;  
+                   $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" id="medicine" name="m_name[]"  class="form-control col-md-4 col-xs-4" placeholder="Name"></td><td><input type="text" id="time" name="m_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Time"></td><td><input type="text" id="duration" name="m_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration"></td><td><input type="text" id="pills" name="m_pills[]"  class="form-control col-md-4 col-xs-4" placeholder="Pills"></td><td> <button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+              });
+
+              $(document).on('click', '.btn_remove', function(){  
+                   var button_id = $(this).attr("id");   
+                   $('#row'+button_id+'').remove();  
+              });  
+            });  
+        </script>
+        <!-- End More Button Medicine -->
+
+
+        <!-- Add More Button Eye Drops -->
+          <script type="text/javascript">
+            $(document).ready(function(){  
+              var i=1;  
+
+              $('#add2').click(function(){  
+                   i++;  
+                   $('#dynamic_field2').append('<tr id="row'+i+'"><td><input type="text" id="eye_drops" name="e_name[]"  class="form-control col-md-4 col-xs-4" placeholder="Name"></td><td><input type="text" id="time" name="e_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Time"></td><td><input type="text" id="duration" name="e_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration"></td><td><input type="text" id="drops" name="e_drops[]"  class="form-control col-md-4 col-xs-4" placeholder="Drops"></td><td> <button type="button" name="remove2" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+              });
+
+              $(document).on('click', '.btn_remove2', function(){  
+                   var button_id = $(this).attr("id");   
+                   $('#row'+button_id+'').remove();  
+              });  
+            });  
+        </script>
+        <!-- End More Button Eye Drops -->
 
           <!-- <script type="text/javascript">
             $(document).ready(function() {

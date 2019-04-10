@@ -1,104 +1,136 @@
 <?php
 
 	include("header.php");
-	
-  if(isset($_POST['submit']))
+
+	if(isset($_POST['submit']))
 	{
 		$name = $_POST['name'];
-    $age = $_POST['age'];
-    $sex = $_POST['sex'];
-    $address = $_POST['address'];
-    $datee = $_POST['datee'];
-    $history = $_POST['history'];
-    $advice = $_POST['advice'];
+	    $age = $_POST['age'];
+	    $sex = $_POST['sex'];
+	    $address = $_POST['address'];
+	    $datee = $_POST['datee'];
+	    $history = $_POST['history'];
+      $diagnosis = $_POST['diagnosis'];
+	    $advice = $_POST['advice'];
 
-    $re_vision = $_POST['re_vision'];
-    $le_vision = $_POST['le_vision'];
-    $re_tension = $_POST['re_tension'];
-    $le_tension = $_POST['le_tension'];
-    $re_sac = $_POST['re_sac'];
-    $le_sac = $_POST['le_sac'];
+	    $re_vision = $_POST['re_vision'];
+	    $le_vision = $_POST['le_vision'];
+	    $re_tension = $_POST['re_tension'];
+	    $le_tension = $_POST['le_tension'];
+	    $re_sac = $_POST['re_sac'];
+      $le_sac = $_POST['le_sac'];
+      $re_fundus = $_POST['re_fundus'];
+	    $le_fundus = $_POST['le_fundus'];
 
-    $re_d_s = $_POST['re_d_s'];
-    $re_d_c = $_POST['re_d_c'];
-    $re_d_a = $_POST['re_d_a'];
+      if(isset($_POST['glasses']))
+      {
+        $glasses = $_POST['glasses'];
+        $re_d_s = $_POST['re_d_s'];
+        $re_d_c = $_POST['re_d_c'];
+        $re_d_a = $_POST['re_d_a'];
 
-    $re_n_s = $_POST['re_n_s'];
-    $re_n_c = $_POST['re_n_c'];
-    $re_n_a = $_POST['re_n_a'];
+        $re_n_s = $_POST['re_n_s'];
+        $re_n_c = $_POST['re_n_c'];
+        $re_n_a = $_POST['re_n_a'];
 
-    $le_d_s = $_POST['le_d_s'];
-    $le_d_c = $_POST['le_d_c'];
-    $le_d_a = $_POST['le_d_a'];
+        $le_d_s = $_POST['le_d_s'];
+        $le_d_c = $_POST['le_d_c'];
+        $le_d_a = $_POST['le_d_a'];
 
-    $le_n_s = $_POST['le_n_s'];
-    $le_n_c = $_POST['le_n_c'];
-    $le_n_a = $_POST['le_n_a'];
+        $le_n_s = $_POST['le_n_s'];
+        $le_n_c = $_POST['le_n_c'];
+        $le_n_a = $_POST['le_n_a'];
+      }
+      else
+      {
+        $glasses = "";
+        $re_d_s = "";
+        $re_d_c = "";
+        $re_d_a = "";
 
-    $m_name = $_POST['m_name'];
-    $m_time = $_POST['m_time'];
-    $m_duration = $_POST['m_duration'];
-    $m_pills = $_POST['m_pills'];
+        $re_n_s = "";
+        $re_n_c = "";
+        $re_n_a = "";
 
-    $e_name = $_POST['e_name'];
-    $e_time = $_POST['e_time'];
-    $e_duration = $_POST['e_duration'];
-    $e_drops = $_POST['e_drops'];
+        $le_d_s = "";
+        $le_d_c = "";
+        $le_d_a = "";
 
-    if(isset($_POST['ot']))
-    {
-      $ot = $_POST['ot'];
-      $blood_sugar = $_POST['blood_sugar'];
-      $blood_pressure = $_POST['blood_pressure'];
-      $k1 = $_POST['k1'];
-      $k2 = $_POST['k2'];
-      $axial_length = $_POST['axial_length'];
-      $iol = $_POST['iol'];
-    }
-    else
-    {
-      $ot = "";
-      $blood_sugar = "";
-      $blood_pressure = "";
-      $k1 = "";
-      $k2 = "";
-      $axial_length = "";
-      $iol = "";
-    }
+        $le_n_s = "";
+        $le_n_c = "";
+        $le_n_a = "";
+      }
 
-		$query = mysqli_query($con, "INSERT INTO opd_details(name, age, sex, address, datee, history, advice, re_vision, le_vision, re_tension, le_tension, re_sac, le_sac, re_d_s, re_d_c, re_d_a, re_n_s, re_n_c, re_n_a, le_d_s, le_d_c, le_d_a, le_n_s, le_n_c, le_n_a, ot, blood_sugar, blood_pressure, k1, k2, axial_length, iol) values ('$name', '$age', '$sex', '$address', '$datee', '$history', '$advice', '$re_vision', '$le_vision', '$re_tension', '$le_tension', '$re_sac', '$le_sac', '$re_d_s', '$re_d_c', '$re_d_a', '$re_n_s', '$re_n_c', '$re_n_a', '$le_d_s', '$le_d_c', '$le_d_a', '$le_n_s', '$le_n_c', '$le_n_a', '$ot', '$blood_sugar', '$blood_pressure', '$k1', '$k2', '$axial_length', '$iol')");
+	    $m_name = $_POST['m_name'];
+	    $m_time = $_POST['m_time'];
+	    $m_duration = $_POST['m_duration'];
+	    $m_pills = $_POST['m_pills'];
+
+	    $e_name = $_POST['e_name'];
+	    $e_time = $_POST['e_time'];
+	    $e_duration = $_POST['e_duration'];
+	    $e_drops = $_POST['e_drops'];
+
+	    if(isset($_POST['ot']))
+	    {
+	      $ot = $_POST['ot'];
+	      $blood_sugar = $_POST['blood_sugar'];
+	      $blood_pressure = $_POST['blood_pressure'];
+	      $k1 = $_POST['k1'];
+	      $k2 = $_POST['k2'];
+	      $axial_length = $_POST['axial_length'];
+	      $iol = $_POST['iol'];
+	    }
+	    else
+	    {
+	      $ot = "";
+	      $blood_sugar = "";
+	      $blood_pressure = "";
+	      $k1 = "";
+	      $k2 = "";
+	      $axial_length = "";
+	      $iol = "";
+	    }
+
+		$query = mysqli_query($con, "INSERT INTO opd_details(name, age, sex, address, datee, history, diagnosis, advice, re_vision, le_vision, re_tension, le_tension, re_sac, le_sac, re_fundus, le_fundus, glasses, re_d_s, re_d_c, re_d_a, re_n_s, re_n_c, re_n_a, le_d_s, le_d_c, le_d_a, le_n_s, le_n_c, le_n_a, ot, blood_sugar, blood_pressure, k1, k2, axial_length, iol) values ('$name', '$age', '$sex', '$address', '$datee', '$history', '$diagnosis', '$advice', '$re_vision', '$le_vision', '$re_tension', '$le_tension', '$re_sac', '$le_sac', '$re_fundus', '$le_fundus', '$glasses', '$re_d_s', '$re_d_c', '$re_d_a', '$re_n_s', '$re_n_c', '$re_n_a', '$le_d_s', '$le_d_c', '$le_d_a', '$le_n_s', '$le_n_c', '$le_n_a', '$ot', '$blood_sugar', '$blood_pressure', '$k1', '$k2', '$axial_length', '$iol')");
 		
-    if($query)
+    	if($query)
 		{
-      $q = mysqli_query($con, "SELECT * FROM opd_details order by id desc limit 1 ");
-      $data = mysqli_fetch_array($q);
+			$q = mysqli_query($con, "SELECT * FROM opd_details order by id desc limit 1 ");
+			$data = mysqli_fetch_array($q);
 
-      for($i=0;$i<sizeof($m_name);$i++)
-      {
-        if(!($m_name[0] == ""))
-        {
-          mysqli_query($con, "INSERT INTO prescribed_medicine(opd_details_id, m_name, m_time, m_duration, m_pills) values ('$data[id]', '$m_name[$i]', '$m_time[$i]', '$m_duration[$i]', '$m_pills[$i]')");
-        }
-      }
+			for($i=0;$i<sizeof($m_name);$i++)
+			{
+				if(!($m_name[0] == ""))
+				{
+					mysqli_query($con, "INSERT INTO prescribed_medicine(opd_details_id, m_name, m_time, m_duration, m_pills) values ('$data[id]', '$m_name[$i]', '$m_time[$i]', '$m_duration[$i]', '$m_pills[$i]')");
+				}
+			}
 
-      for($i=0;$i<sizeof($e_name);$i++)
-      {
-        if(!($e_name[0] == ""))
-        {
-          mysqli_query($con, "INSERT INTO prescribed_eye_drops(opd_details_id, e_name, e_time, e_duration, e_drops) values ('$data[id]', '$e_name[$i]', '$e_time[$i]', '$e_duration[$i]', '$e_drops[$i]')");
-        }
-      }
+			for($i=0;$i<sizeof($e_name);$i++)
+			{
+				if(!($e_name[0] == ""))
+				{
+					mysqli_query($con, "INSERT INTO prescribed_eye_drops(opd_details_id, e_name, e_time, e_duration, e_drops) values ('$data[id]', '$e_name[$i]', '$e_time[$i]', '$e_duration[$i]', '$e_drops[$i]')");
+				}
+			}
 
 			$msg1 = "Submitted Successfully";
 		}
 		else
 		{
+      echo mysqli_error($query);
 			$msg2 = "Error";
 		}
 	}
 
 ?>
 
+<style type="text/css">
+  input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+</style>
 <script>
   $(function() {
     $( "#history" ).autocomplete({
@@ -198,13 +230,13 @@
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Age
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="col-md-3 col-sm-3 col-xs-6">
                         <input type="text" id="age" name="age"  class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Gender 
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Sex 
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <div id="gender" class="btn-group" data-toggle="buttons">
@@ -229,30 +261,23 @@
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Date
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="col-md-3 col-sm-3 col-xs-6">
                         <input id="birthday" name="datee" class="date-picker form-control col-md-7 col-xs-12"  type="text">
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cheif Complaint History
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Chief Complaint History
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <textarea class="form-control" id="history" name="history" rows="3"></textarea>
                       </div>
                     </div>
 
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Advice
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <textarea class="form-control" name="advice" rows="3"></textarea>
-                      </div>
-                    </div>
 
-                    <!-- Diagnosis -->
+                    <!-- Examination -->
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Diagnosis
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Examination
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <table class="table">
@@ -284,17 +309,48 @@
                                 <input type="text" id="le_sac" name="le_sac"  class="form-control col-md-4 col-xs-4" placeholder="L/E">
                               </td>
                             </tr>
+                            <tr>
+                              <th scope="row">Fundus</th>
+                              <td>
+                                <input type="text" id="re_fundus" name="re_fundus"  class="form-control col-md-4 col-xs-4" placeholder="R/E">
+                              </td>
+                              <td>
+                                <input type="text" id="le_fundus" name="le_fundus"  class="form-control col-md-4 col-xs-4" placeholder="L/E">
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
                     </div>
-                    <!-- End Diagnosis -->
+                    <!-- End Examination -->
+
+
+                    <!-- Diagnosis -->
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Diagnosis
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="diagnosis" name="diagnosis"  class="form-control col-md-7 col-xs-12">
+                      </div>
+                    </div>
+                    <!-- End DIagnosis -->
+
+
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Advice
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <textarea class="form-control" name="advice" rows="3"></textarea>
+                      </div>
+                    </div>
 
                     <!-- Glasses -->
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Glasses
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                        <input id="toggleElement2" type="checkbox" name="glasses" onchange="toggleStatus2()" value="glasses" />&nbsp;Glasses
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="col-md-6 col-sm-6 col-xs-12" id="elementsToOperateOn2">
                         <table class="table">
                           <thead>
                             <tr>
@@ -332,7 +388,7 @@
                         <table class="table">
                           <thead>
                             <tr>
-                              <th colspan="4" align="center">R/E</th>
+                              <th colspan="4" align="center">L/E</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -430,10 +486,18 @@
                           <tbody>
                             <tr>
                               <td>
-                                <input type="text" id="medicine" name="m_name[]"  class="form-control col-md-4 col-xs-4" placeholder="Name">
+                                <input type="text" id="medicine" name="m_name[]"  class="form-control col-md-4 col-xs-4" list="browsers" placeholder="Name">
+                                  <datalist id="browsers">
+                                    <?php
+                                      $query = mysqli_query($con, "SELECT * FROM medicine WHERE name LIKE '%".$searchTerm."%' ORDER BY name ASC");
+                                      while ($row = mysqli_fetch_array($query)) {
+                                        echo "<option value='".$row['name']."'>";
+                                      }
+                                    ?>
+                                  </datalist>
                               </td>
                               <td>
-                                <input type="text" id="time" name="m_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Time">
+                                <input type="text" id="time" name="m_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Times">
                               </td>
                               <td>
                                 <input type="text" id="duration" name="m_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration">
@@ -456,19 +520,27 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <table class="table" id="dynamic_field2">
+                        <table class="table">
                           <thead>
                             <tr>
                               <th colspan="4" align="center">Eye Drops</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody id="dynamic_field2">
                             <tr>
                               <td>
-                                <input type="text" id="eye_drops" name="e_name[]"  class="form-control col-md-4 col-xs-4" placeholder="Name">
+                                <input type="text" id="eye_drops" name="e_name[]"  class="form-control col-md-4 col-xs-4" list="browsers2"placeholder="Name">
+                                  <datalist id="browsers2">
+                                    <?php
+                                      $query = mysqli_query($con, "SELECT * FROM eye_drops WHERE name LIKE '%".$searchTerm."%' ORDER BY name ASC");
+                                      while ($row = mysqli_fetch_array($query)) {
+                                        echo "<option value='".$row['name']."'>";
+                                      }
+                                    ?>
+                                  </datalist>
                               </td>
                               <td>
-                                <input type="text" id="time" name="e_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Time">
+                                <input type="text" id="time" name="e_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Times">
                               </td>
                               <td>
                                 <input type="text" id="duration" name="e_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration">
@@ -497,6 +569,24 @@
             </div>
           </div>
 
+          <!-- Add More Button Medicine -->
+          <script type="text/javascript">
+            $(document).ready(function(){   
+              var i=1;  
+
+              $('#add').click(function(){  
+                   i++;  
+                   $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" id="medicine" name="m_name[]"  class="form-control col-md-4 col-xs-4"  list="browsers" placeholder="Name"></td><td><input type="text" id="time" name="m_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Time"></td><td><input type="text" id="duration" name="m_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration"></td><td><input type="text" id="pills" name="m_pills[]"  class="form-control col-md-4 col-xs-4" placeholder="Pills"></td><td> <button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+              });
+
+              $(document).on('click', '.btn_remove', function(){  
+                   var button_id = $(this).attr("id");   
+                   $('#row'+button_id+'').remove();  
+              });  
+            });  
+        </script>
+        <!-- End More Button Medicine -->
+
           <script type="text/javascript">
             $(document).ready(function() {
               $('#birthday').daterangepicker({
@@ -509,6 +599,7 @@
           </script>
 
 
+          <!-- For OT purpose -->
           <script type="text/javascript">
             $('#elementsToOperateOn :input').attr('disabled', true);
             
@@ -532,24 +623,34 @@
                 }   
             }
           </script>
+          <!-- End For OT Purpose -->
 
-          <!-- Add More Button Medicine -->
+
+          <!-- For Glasses -->
           <script type="text/javascript">
-            $(document).ready(function(){   
-              var i=1;  
+            $('#elementsToOperateOn2 :input').attr('disabled', true);
+            
+            $(document).ready(function() {
+ 
+              handleStatusChanged2();
+              
+            });
 
-              $('#add').click(function(){  
-                   i++;  
-                   $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" id="medicine" name="m_name[]"  class="form-control col-md-4 col-xs-4" placeholder="Name"></td><td><input type="text" id="time" name="m_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Time"></td><td><input type="text" id="duration" name="m_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration"></td><td><input type="text" id="pills" name="m_pills[]"  class="form-control col-md-4 col-xs-4" placeholder="Pills"></td><td> <button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
-              });
+            function handleStatusChanged2() {
+                $('#toggleElement2').on('change', function () {
+                  toggleStatus2();   
+                });
+            }
 
-              $(document).on('click', '.btn_remove', function(){  
-                   var button_id = $(this).attr("id");   
-                   $('#row'+button_id+'').remove();  
-              });  
-            });  
-        </script>
-        <!-- End More Button Medicine -->
+            function toggleStatus2() {
+                if ($('#toggleElement2').is(':checked')) {
+                    $('#elementsToOperateOn2 :input').removeAttr('disabled');
+                } else {
+                  $('#elementsToOperateOn2 :input').attr('disabled', true);  
+                }   
+            }
+          </script>
+          <!-- End For Glasses -->
 
 
         <!-- Add More Button Eye Drops -->
@@ -559,7 +660,7 @@
 
               $('#add2').click(function(){  
                    i++;  
-                   $('#dynamic_field2').append('<tr id="row'+i+'"><td><input type="text" id="eye_drops" name="e_name[]"  class="form-control col-md-4 col-xs-4" placeholder="Name"></td><td><input type="text" id="time" name="e_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Time"></td><td><input type="text" id="duration" name="e_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration"></td><td><input type="text" id="drops" name="e_drops[]"  class="form-control col-md-4 col-xs-4" placeholder="Drops"></td><td> <button type="button" name="remove2" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+                   $('#dynamic_field2').append('<tr id="row'+i+'"><td><input type="text" id="eye_drops" name="e_name[]"  class="form-control col-md-4 col-xs-4" list="browsers2" placeholder="Name"></td><td><input type="text" id="time" name="e_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Time"></td><td><input type="text" id="duration" name="e_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration"></td><td><input type="text" id="drops" name="e_drops[]"  class="form-control col-md-4 col-xs-4" placeholder="Drops"></td><td> <button type="button" name="remove2" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
               });
 
               $(document).on('click', '.btn_remove2', function(){  

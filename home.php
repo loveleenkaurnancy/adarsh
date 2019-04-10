@@ -38,6 +38,13 @@
           </div>
         </div>
 
+        <div class="row no-print">
+        	<div class="col-xs-12">
+        		<button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print
+        		</button>
+        	</div>
+        </div>
+
 
 
   <?php

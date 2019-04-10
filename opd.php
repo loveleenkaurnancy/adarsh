@@ -11,16 +11,72 @@
 	    $datee = $_POST['datee'];
 	    $history = $_POST['history'];
       $diagnosis = $_POST['diagnosis'];
-	    $advice = $_POST['advice'];
-
+	    
+      if($_POST['advice'])
+      {
+        $advice = $_POST['advice'];
+      }
+      else
+      {
+        $advice = "N/A";
+      }
+      
 	    $re_vision = $_POST['re_vision'];
 	    $le_vision = $_POST['le_vision'];
-	    $re_tension = $_POST['re_tension'];
-	    $le_tension = $_POST['le_tension'];
-	    $re_sac = $_POST['re_sac'];
-      $le_sac = $_POST['le_sac'];
-      $re_fundus = $_POST['re_fundus'];
-	    $le_fundus = $_POST['le_fundus'];
+
+      if($_POST['re_tension'])
+      {
+        $re_tension = $_POST['re_tension'];
+      }
+      else
+      {
+        $re_tension = "N/A";
+      }
+
+      if($_POST['le_tension'])
+      {
+        $le_tension = $_POST['le_tension'];
+      }
+      else
+      {
+        $le_tension = "N/A";
+      }
+
+      if($_POST['re_sac'])
+      {
+        $re_sac = $_POST['re_sac'];
+      }
+      else
+      {
+        $re_sac = "N/A";
+      }
+
+      if($_POST['le_sac'])
+      {
+        $le_sac = $_POST['le_sac'];
+      }
+      else
+      {
+        $le_sac = "N/A";
+      }
+
+      if($_POST['re_fundus'])
+      {
+        $re_fundus = $_POST['re_fundus'];
+      }
+      else
+      {
+        $re_fundus = "N/A";
+      }
+
+      if($_POST['le_fundus'])
+      {
+        $le_fundus = $_POST['le_fundus'];
+      }
+      else
+      {
+        $le_fundus = "N/A";
+      }
 
       if(isset($_POST['glasses']))
       {
@@ -61,15 +117,35 @@
         $le_n_a = "";
       }
 
-	    $m_name = $_POST['m_name'];
-	    $m_time = $_POST['m_time'];
-	    $m_duration = $_POST['m_duration'];
-	    $m_pills = $_POST['m_pills'];
+      if($_POST['m_name'])
+      {
+        $m_name = $_POST['m_name'];
+        $m_time = $_POST['m_time'];
+        $m_duration = $_POST['m_duration'];
+        $m_pills = $_POST['m_pills'];
+      }
+      else
+      {
+        $m_name = "";
+        $m_time = "";
+        $m_duration = "";
+        $m_pills = "";
+      }
 
-	    $e_name = $_POST['e_name'];
-	    $e_time = $_POST['e_time'];
-	    $e_duration = $_POST['e_duration'];
-	    $e_drops = $_POST['e_drops'];
+      if($_POST['e_name'])
+      {
+        $e_name = $_POST['e_name'];
+        $e_time = $_POST['e_time'];
+        $e_duration = $_POST['e_duration'];
+        $e_drops = $_POST['e_drops'];
+      }
+      else
+      {
+        $e_name = "";
+        $e_time = "";
+        $e_duration = "";
+        $e_drops = "";
+      }
 
 	    if(isset($_POST['ot']))
 	    {
@@ -94,7 +170,7 @@
 
 		$query = mysqli_query($con, "INSERT INTO opd_details(name, age, sex, address, datee, history, diagnosis, advice, re_vision, le_vision, re_tension, le_tension, re_sac, le_sac, re_fundus, le_fundus, glasses, re_d_s, re_d_c, re_d_a, re_n_s, re_n_c, re_n_a, le_d_s, le_d_c, le_d_a, le_n_s, le_n_c, le_n_a, ot, blood_sugar, blood_pressure, k1, k2, axial_length, iol) values ('$name', '$age', '$sex', '$address', '$datee', '$history', '$diagnosis', '$advice', '$re_vision', '$le_vision', '$re_tension', '$le_tension', '$re_sac', '$le_sac', '$re_fundus', '$le_fundus', '$glasses', '$re_d_s', '$re_d_c', '$re_d_a', '$re_n_s', '$re_n_c', '$re_n_a', '$le_d_s', '$le_d_c', '$le_d_a', '$le_n_s', '$le_n_c', '$le_n_a', '$ot', '$blood_sugar', '$blood_pressure', '$k1', '$k2', '$axial_length', '$iol')");
 		
-    	if($query)
+    if($query)
 		{
 			$q = mysqli_query($con, "SELECT * FROM opd_details order by id desc limit 1 ");
 			$data = mysqli_fetch_array($q);
@@ -115,6 +191,7 @@
 				}
 			}
 
+      header("location:preview.php");
 			$msg1 = "Submitted Successfully";
 		}
 		else
@@ -223,7 +300,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Name <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="name" name="name"  class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="name" name="name"  class="form-control col-md-7 col-xs-12" required="required">
                       </div>
                     </div>
 
@@ -231,7 +308,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Age
                       </label>
                       <div class="col-md-3 col-sm-3 col-xs-6">
-                        <input type="text" id="age" name="age"  class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="age" name="age"  class="form-control col-md-7 col-xs-12" required="required">
                       </div>
                     </div>
 
@@ -241,10 +318,10 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <div id="gender" class="btn-group" data-toggle="buttons">
                           <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="sex" value="male" required> &nbsp; Male &nbsp;
+                            <input type="radio" name="sex" value="Male" required> &nbsp; Male &nbsp;
                           </label>
                           <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="sex" value="female"> Female
+                            <input type="radio" name="sex" value="Female"> Female
                           </label>
                         </div>
                       </div>
@@ -254,7 +331,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Address
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <textarea class="form-control" name="address" rows="3"></textarea>
+                        <textarea class="form-control" name="address" rows="3" required="required"></textarea>
                       </div>
                     </div>
 
@@ -262,7 +339,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Date
                       </label>
                       <div class="col-md-3 col-sm-3 col-xs-6">
-                        <input id="birthday" name="datee" class="date-picker form-control col-md-7 col-xs-12"  type="text">
+                        <input id="birthday" name="datee" class="date-picker form-control col-md-7 col-xs-12" type="text" required="required">
                       </div>
                     </div>
 
@@ -270,7 +347,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Chief Complaint History
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <textarea class="form-control" id="history" name="history" rows="3"></textarea>
+                        <textarea class="form-control" id="history" name="history" rows="3" required="required"></textarea>
                       </div>
                     </div>
 
@@ -285,10 +362,10 @@
                             <tr>
                               <th scope="row">Vision</th>
                               <td>
-                                <input type="text" id="re_vision" name="re_vision"  class="form-control col-md-4 col-xs-4" placeholder="R/E">
+                                <input type="text" id="re_vision" name="re_vision"  class="form-control col-md-4 col-xs-4" placeholder="R/E" required="required">
                               </td>
                               <td>
-                                <input type="text" id="le_vision" name="le_vision"  class="form-control col-md-4 col-xs-4" placeholder="L/E">
+                                <input type="text" id="le_vision" name="le_vision"  class="form-control col-md-4 col-xs-4" placeholder="L/E" required="required">
                               </td>
                             </tr>
                             <tr>
@@ -330,7 +407,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Diagnosis
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="diagnosis" name="diagnosis"  class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="diagnosis" name="diagnosis"  class="form-control col-md-7 col-xs-12" required="required">
                       </div>
                     </div>
                     <!-- End DIagnosis -->
@@ -560,7 +637,7 @@
 
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button type="submit" name="submit" class="btn btn-success">Submit</button>
+                        <button type="submit" name="submit" class="btn btn-success">Preview</button>
                       </div>
                     </div>
                   </form>

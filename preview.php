@@ -1,12 +1,28 @@
+<?php
+include("config.php");
+session_start();
+@$email=$_SESSION['email'];
+@$name=$_SESSION['name'];
+if($email=="")
+{
+  header("location:index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title></title>
 	<link rel="stylesheet" href="css/bootstrap4.min.css">
+
+	<!-- Bootstrap core CSS -->
+
+  <script src="js/jquery.min.js"></script>
+
 	<style type="text/css">
 		body
 		{
-			font-size: 14px;
+			font-size: 15px;
 		}
 
 		.tcenter
@@ -48,7 +64,6 @@
 
 	<div class="row" style="width: 1000px; margin-left: auto; margin-right: auto;">
 		<?php
-			include("config.php");
 			$query = mysqli_query($con, "SELECT * FROM opd_details order by id desc limit 1");
 			$row = mysqli_fetch_array($query);
 			$opd_details_id = $row['id'];
@@ -114,7 +129,7 @@
 						</tr>
 						<tr>
 							<td>L/E</td>
-							<td><?php echo $row['re_fundus']; ?>
+							<td><?php echo $row['le_fundus']; ?>
 						</tr>
 					</table>
 
@@ -197,7 +212,7 @@
 				<br>	
 			</div>
 
-			<!-- Medicine Prescription -->
+			<!-- Eye Drops Prescription -->
 			<div class="col-md-8" style="margin-right: 200px;">
 				<b>Eye Drops</b><br>
 				<table class="table">
@@ -227,7 +242,7 @@
 
 				</table>
 			</div>
-			<!-- End Medicine Prescription -->
+			<!-- End Eye Drops Prescription -->
 
 			<div class="col-md-12">
 				<br>	
@@ -357,9 +372,19 @@
 
 
 			<div class="col-md-12" style="text-align: right;">
-				<br><br><b>Signature</b>
+				<br><br>
+				<button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> <b>Signature</b></button>
+			
 			</div>
 
+		<!-- 	<div class="row no-print">
+                      <div class="col-xs-12">
+                        <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button>
+                        
+                      </div>
+                    </div> -->
+
 		</div>
+
 </body>
 </html>

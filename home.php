@@ -9,41 +9,75 @@
         <div class="">
 
           <div class="row top_tiles">
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-check-square-o"></i>
+            <a href="todayopd.php">
+              <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-check-square-o"></i>
+                  </div>
+                  <p><?php $d = date("d/m/Y"); echo $d ?></p><p></p>
+                  <h3>Today's OPD</h3>
+                  <?php
+                    $query = mysqli_query($con,"select count(*) from opd_details where datee='$d' ");
+                    $data = mysqli_fetch_array($query);
+                    echo "<div class='count'>$data[0]</div>";
+                  ?>
                 </div>
-                <p><?php $d = date("d/m/Y"); echo $d ?></p><p></p>
-                <h3>Total OPD</h3>
-                <?php
-                  $query = mysqli_query($con,"select count(*) from opd_details where datee='$d' ");
-                  $data = mysqli_fetch_array($query);
-                  echo "<div class='count'>$data[0]</div>";
-                ?>
               </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-check-square-o"></i>
+            </a>
+            <a href="todayot.php">
+              <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-check-square-o"></i>
+                  </div>
+                  <p><?php $d = date("d/m/Y"); echo $d ?></p><p></p>
+                  <h3>Today's OT</h3>
+                  <?php
+                    $query = mysqli_query($con,"select count(*) from opd_details where ot='ot' and datee='$d' ");
+                    $data = mysqli_fetch_array($query);
+                    echo "<div class='count'>$data[0]</div>";
+                  ?>
                 </div>
-                <p><?php $d = date("d/m/Y"); echo $d ?></p><p></p>
-                <h3>Total OT</h3>
-                <?php
-                  $query = mysqli_query($con,"select count(*) from opd_details where ot='ot' and datee='$d' ");
-                  $data = mysqli_fetch_array($query);
-                  echo "<div class='count'>$data[0]</div>";
-                ?>
+              </div> 
+            </a>
+            <a href="totalopd.php">
+              <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-check-square-o"></i>
+                  </div>
+                  <p>&nbsp;</p><p></p>
+                  <h3>Total OPD</h3>
+                  <?php
+                    $query = mysqli_query($con,"select count(*) from opd_details");
+                    $data = mysqli_fetch_array($query);
+                    echo "<div class='count'>$data[0]</div>";
+                  ?>
+                </div>
               </div>
-            </div> 
+            </a>
+            <a href="totalot.php">
+              <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-check-square-o"></i>
+                  </div>
+                  <p>&nbsp;</p><p></p>
+                  <h3>Total OT</h3>
+                  <?php
+                    $query = mysqli_query($con,"select count(*) from opd_details where ot='ot'");
+                    $data = mysqli_fetch_array($query);
+                    echo "<div class='count'>$data[0]</div>";
+                  ?>
+                </div>
+              </div> 
+            </a>
           </div>
         </div>
 
-        <div class="row no-print">
+        <!-- <div class="row no-print">
         	<div class="col-xs-12">
         		<button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print
         		</button>
         	</div>
-        </div>
+        </div> -->
 
 
 

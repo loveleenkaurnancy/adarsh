@@ -101,6 +101,8 @@ if($email=="")
                 </li>
                 <li><a href="opd.php"><i class="fa fa-edit"></i>OPD Form </a>
                 </li>
+                <li><a href="opd.php"><i class="fa fa-edit"></i>Patient History </a>
+                </li>
                 <!-- <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="form.html">General Form</a>
@@ -238,7 +240,7 @@ if($email=="")
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="javascript:;">  Profile</a>
+                  <!-- <li><a href="javascript:;">  Profile</a>
                   </li>
                   <li>
                     <a href="javascript:;">
@@ -248,7 +250,7 @@ if($email=="")
                   </li>
                   <li>
                     <a href="javascript:;">Help</a>
-                  </li>
+                  </li> -->
                   <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </li>
                 </ul>

@@ -1,6 +1,7 @@
 <?php
 
 	include("header.php");
+  $_SESSION['id'] = "";
 
 	if(isset($_POST['submit']))
 	{
@@ -191,7 +192,7 @@
 				}
 			}
 
-      header("location:preview.php");
+      echo "<script>window.open('preview.php'); </script>";
 			$msg1 = "Submitted Successfully";
 		}
 		else
@@ -233,13 +234,225 @@
 <script src="js/jquery-ui.js"></script> 
 
 
-
-
 <link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <script src="js/refreshform.js"></script> -->
+  <script type="text/javascript">
+    $(document).ready(function()
+    {
+      $("#submit").click(function()
+      {
+        var name = $("#name").val();
+        var age = $("#age").val();
+        
+        var sex = $("input[name='sex']:checked").val();
+
+        var address = $("#address").val();
+        var datee = $("#datee").val();
+
+        var history = $("#history").val();
+        var diagnosis = $("#diagnosis").val();
+        var advice = $("#advice").val();
+
+        var re_vision = $("#re_vision").val();
+        var le_vision = $("#le_vision").val();
+        var re_tension = $("#re_tension").val();
+        var le_tension = $("#le_tension").val();
+        var re_sac = $("#re_sac").val();
+        var le_sac = $("#le_sac").val();
+        var re_fundus = $("#re_fundus").val();
+        var le_fundus = $("#le_fundus").val();
+
+        // var glasses = $("#glasses").val();
+        var checkBoxGlass = document.getElementById("glasses");
+        if (checkBoxGlass.checked == true)
+        {
+          var glasses = "glasses";
+        } 
+        else
+        {
+          var glasses = "";
+        }
+
+        var re_d_s = $("#re_d_s").val();
+        var re_d_c = $("#re_d_c").val();
+        var re_d_a = $("#re_d_a").val();
+        var re_n_s = $("#re_n_s").val();
+        var re_n_c = $("#re_n_c").val();
+        var re_n_a = $("#re_n_a").val();
+        var le_d_s = $("#le_d_s").val();
+        var le_d_c = $("#le_d_c").val();
+        var le_d_a = $("#le_d_a").val();
+        var le_n_s = $("#le_n_s").val();
+        var le_n_c = $("#le_n_c").val();
+        var le_n_a = $("#le_n_a").val();
+        
+        
+        var text1 = new Array();
+        $("input[name='m_name[]']").each(function(){
+            text1.push($(this).val());
+        });
+
+        var text2 = new Array();
+        $("input[name='m_time[]']").each(function(){
+            text2.push($(this).val());
+        });
+
+        var text3 = new Array();
+        $("input[name='m_duration[]']").each(function(){
+            text3.push($(this).val());
+        });
+
+        var text4 = new Array();
+        $("input[name='m_pills[]']").each(function(){
+            text4.push($(this).val());
+        });
+
+        // var m_name = $("#m_name").val();
+        // var m_time = $("#m_time").val();
+        // var m_duration = $("#m_duration").val();
+        // var m_pills = $("#m_pills").val();
+
+        var text5 = new Array();
+        $("input[name='e_name[]']").each(function(){
+            text5.push($(this).val());
+        });
+
+        var text6 = new Array();
+        $("input[name='e_time[]']").each(function(){
+            text6.push($(this).val());
+        });
+
+        var text7 = new Array();
+        $("input[name='e_duration[]']").each(function(){
+            text7.push($(this).val());
+        });
+
+        var text8 = new Array();
+        $("input[name='e_drops[]']").each(function(){
+            text8.push($(this).val());
+        });
+
+        // var e_name = $("#e_name").val();
+        // var e_time = $("#e_time").val();
+        // var e_duration = $("#e_duration").val();
+        // var e_drops = $("#e_drops").val();
+
+        // var ot = $("#ot").val();
+        var checkBoxOt = document.getElementById("ot");
+        if (checkBoxOt.checked == true)
+        {
+          var ot = "ot";
+        } 
+        else
+        {
+          var ot = "";
+        }
+        var blood_sugar = $("#blood_sugar").val();
+        var blood_pressure = $("#blood_pressure").val();
+        var k1 = $("#k1").val();
+        var k2 = $("#k2").val();
+        var axial_length = $("#axial_length").val();
+        var iol = $("#iol").val();
+
+        if (name == '') 
+        {
+          alert("Insertion Failed Some Fields are Blank....!!");
+        }
+        else
+        {
+          // Returns successful data submission message when the entered information is stored in database.
+          $.post("refreshform.php",
+          {
+            name1: name,
+            age1: age,
+            sex1: sex,
+            address1: address,
+            datee1: datee,
+
+            history1: history,
+            diagnosis1:diagnosis,
+            advice1: advice,
+
+            re_vision1: re_vision,
+            le_vision1: le_vision,
+            re_tension1: re_tension,
+            le_tension1: le_tension,
+            re_sac1: re_sac,
+            le_sac1: le_sac,
+            re_fundus1: re_fundus,
+            le_fundus1: le_fundus,
+
+            glasses1: glasses,
+            re_d_s1: re_d_s,
+            re_d_c1: re_d_c,
+            re_d_a1: re_d_a,
+            re_n_s1: re_n_s,
+            re_n_c1: re_n_c,
+            re_n_a1: re_n_a,
+            le_d_s1: le_d_s,
+            le_d_c1: le_d_c,
+            le_d_a1: le_d_a,
+            le_n_s1: le_n_s,
+            le_n_c1: le_n_c,
+            le_n_a1: le_n_a,
+
+            m_name1: text1,
+            m_time1: text2,
+            m_duration1: text3,
+            m_pills1: text4,
+
+            e_name1: text5,
+            e_time1: text6,
+            e_duration1: text7,
+            e_drops1: text8,
+
+            ot1: ot,
+            blood_sugar1: blood_sugar,
+            blood_pressure1: blood_pressure,
+            k11: k1,
+            k21: k2,
+            axial_length1: axial_length,
+            iol1: iol,
+
+          },
+          function(data)
+          {
+           // alert(data);
+            // $('#form')[0].reset(); // To reset form fields
+          });
+
+          window.open('preview.php');
+        }
+      });
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
 
       <!-- page content -->
       <div class="right_col" role="main">
@@ -300,7 +513,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Name <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="name" name="name"  class="form-control col-md-7 col-xs-12" required="required">
+                        <input type="text" id="name" name="name"  class="form-control col-md-7 col-xs-12" >
                       </div>
                     </div>
 
@@ -308,7 +521,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Age
                       </label>
                       <div class="col-md-3 col-sm-3 col-xs-6">
-                        <input type="text" id="age" name="age"  class="form-control col-md-7 col-xs-12" required="required">
+                        <input type="text" id="age" name="age"  class="form-control col-md-7 col-xs-12" >
                       </div>
                     </div>
 
@@ -318,10 +531,10 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <div id="gender" class="btn-group" data-toggle="buttons">
                           <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="sex" value="Male" required> &nbsp; Male &nbsp;
+                            <input type="radio" id="sex" name="sex" value="Male" required> &nbsp; Male &nbsp;
                           </label>
                           <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="sex" value="Female"> Female
+                            <input type="radio" id="sex" name="sex" value="Female"> Female
                           </label>
                         </div>
                       </div>
@@ -331,7 +544,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Address
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <textarea class="form-control" name="address" rows="3" required="required"></textarea>
+                        <textarea class="form-control" id="address" name="address" rows="3" ></textarea>
                       </div>
                     </div>
 
@@ -339,7 +552,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Date
                       </label>
                       <div class="col-md-3 col-sm-3 col-xs-6">
-                        <input id="birthday" name="datee" class="date-picker form-control col-md-7 col-xs-12" type="text" required="required">
+                        <input id="datee" name="datee" class="date-picker form-control col-md-7 col-xs-12" type="text" >
                       </div>
                     </div>
 
@@ -347,7 +560,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Chief Complaint History
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <textarea class="form-control" id="history" name="history" rows="3" required="required"></textarea>
+                        <textarea class="form-control" id="history" name="history" rows="3" ></textarea>
                       </div>
                     </div>
 
@@ -362,10 +575,10 @@
                             <tr>
                               <th scope="row">Vision</th>
                               <td>
-                                <input type="text" id="re_vision" name="re_vision"  class="form-control col-md-4 col-xs-4" placeholder="R/E" required="required">
+                                <input type="text" id="re_vision" name="re_vision"  class="form-control col-md-4 col-xs-4" placeholder="R/E" >
                               </td>
                               <td>
-                                <input type="text" id="le_vision" name="le_vision"  class="form-control col-md-4 col-xs-4" placeholder="L/E" required="required">
+                                <input type="text" id="le_vision" name="le_vision"  class="form-control col-md-4 col-xs-4" placeholder="L/E" >
                               </td>
                             </tr>
                             <tr>
@@ -407,7 +620,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Diagnosis
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="diagnosis" name="diagnosis"  class="form-control col-md-7 col-xs-12" required="required">
+                        <input type="text" id="diagnosis" name="diagnosis"  class="form-control col-md-7 col-xs-12" >
                       </div>
                     </div>
                     <!-- End DIagnosis -->
@@ -418,14 +631,14 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Advice
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <textarea class="form-control" name="advice" rows="3"></textarea>
+                        <textarea class="form-control" id="advice" name="advice" rows="3"></textarea>
                       </div>
                     </div>
 
                     <!-- Glasses -->
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-                        <input id="toggleElement2" type="checkbox" name="glasses" onchange="toggleStatus2()" value="glasses" />&nbsp;Glasses
+                        <input id="glasses" type="checkbox" name="glasses" onchange="toggleStatus2()" value="glasses" />&nbsp;Glasses
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12" id="elementsToOperateOn2">
                         <table class="table">
@@ -438,25 +651,25 @@
                             <tr>
                               <th scope="row">Distance</th>
                               <td>
-                                <input type="text" id="r_d_s" name="re_d_s"  class="form-control col-md-4 col-xs-4" placeholder="Sph">
+                                <input type="text" id="re_d_s" name="re_d_s"  class="form-control col-md-4 col-xs-4" placeholder="Sph">
                               </td>
                               <td>
-                                <input type="text" id="r_d_c" name="re_d_c"  class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
+                                <input type="text" id="re_d_c" name="re_d_c"  class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
                               </td>
                               <td>
-                                <input type="text" id="r_d_a" name="re_d_a"  class="form-control col-md-4 col-xs-4" placeholder="Axis">
+                                <input type="text" id="re_d_a" name="re_d_a"  class="form-control col-md-4 col-xs-4" placeholder="Axis">
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">Near</th>
                               <td>
-                                <input type="text" id="r_n_s" name="re_n_s"  class="form-control col-md-4 col-xs-4" placeholder="Sph">
+                                <input type="text" id="re_n_s" name="re_n_s"  class="form-control col-md-4 col-xs-4" placeholder="Sph">
                               </td>
                               <td>
-                                <input type="text" id="r_n_c" name="re_n_c"  class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
+                                <input type="text" id="re_n_c" name="re_n_c"  class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
                               </td>
                               <td>
-                                <input type="text" id="r_n_a" name="re_n_a"  class="form-control col-md-4 col-xs-4" placeholder="Axis">
+                                <input type="text" id="re_n_a" name="re_n_a"  class="form-control col-md-4 col-xs-4" placeholder="Axis">
                               </td>
                             </tr>
                           </tbody>
@@ -472,25 +685,25 @@
                             <tr>
                               <th scope="row">Distance</th>
                               <td>
-                                <input type="text" id="l_d_s" name="le_d_s"  class="form-control col-md-4 col-xs-4" placeholder="Sph">
+                                <input type="text" id="le_d_s" name="le_d_s"  class="form-control col-md-4 col-xs-4" placeholder="Sph">
                               </td>
                               <td>
-                                <input type="text" id="l_d_c" name="le_d_c"  class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
+                                <input type="text" id="le_d_c" name="le_d_c"  class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
                               </td>
                               <td>
-                                <input type="text" id="l_d_a" name="le_d_a"  class="form-control col-md-4 col-xs-4" placeholder="Axis">
+                                <input type="text" id="le_d_a" name="le_d_a"  class="form-control col-md-4 col-xs-4" placeholder="Axis">
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">Near</th>
                               <td>
-                                <input type="text" id="l_n_s" name="le_n_s"  class="form-control col-md-4 col-xs-4" placeholder="Sph">
+                                <input type="text" id="le_n_s" name="le_n_s"  class="form-control col-md-4 col-xs-4" placeholder="Sph">
                               </td>
                               <td>
-                                <input type="text" id="l_n_c" name="le_n_c"  class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
+                                <input type="text" id="le_n_c" name="le_n_c"  class="form-control col-md-4 col-xs-4" placeholder="Cyl.">
                               </td>
                               <td>
-                                <input type="text" id="l_n_a" name="le_n_a"  class="form-control col-md-4 col-xs-4" placeholder="Axis">
+                                <input type="text" id="le_n_a" name="le_n_a"  class="form-control col-md-4 col-xs-4" placeholder="Axis">
                               </td>
                             </tr>
                           </tbody>
@@ -502,7 +715,7 @@
                     <!-- OT -->
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-                        <input id="toggleElement" type="checkbox" name="ot" onchange="toggleStatus()" value="ot" />&nbsp;For OT Purpose 
+                        <input id="ot" type="checkbox" name="ot" onchange="toggleStatus()" value="ot" />&nbsp;For OT Purpose 
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12" id="elementsToOperateOn">
                         <div class="form-group" id="elementsToOperateOn">
@@ -563,7 +776,7 @@
                           <tbody>
                             <tr>
                               <td>
-                                <input type="text" id="medicine" name="m_name[]"  class="form-control col-md-4 col-xs-4" list="browsers" placeholder="Name">
+                                <input type="text" id="m_name[]" name="m_name[]"  class="form-control col-md-4 col-xs-4" list="browsers" placeholder="Name">
                                   <datalist id="browsers">
                                     <?php
                                       $query = mysqli_query($con, "SELECT * FROM medicine WHERE name LIKE '%".$searchTerm."%' ORDER BY name ASC");
@@ -574,16 +787,16 @@
                                   </datalist>
                               </td>
                               <td>
-                                <input type="text" id="time" name="m_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Times">
+                                <input type="text" id="m_time[]" name="m_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Times">
                               </td>
                               <td>
-                                <input type="text" id="duration" name="m_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration">
+                                <input type="text" id="m_duration[]" name="m_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration">
                               </td>
                               <td>
-                                <input type="text" id="pills" name="m_pills[]"  class="form-control col-md-4 col-xs-4" placeholder="Pills">
+                                <input type="text" id="m_pills[]" name="m_pills[]"  class="form-control col-md-4 col-xs-4" placeholder="Pills">
                               </td>
                               <td>
-                                <button type="button" name="add" id="add" class="btn btn-success">Add More</button>
+                                <button type="button" id="add" name="add" class="btn btn-success">Add More</button>
                               </td>
                             </tr>
                           </tbody>
@@ -606,7 +819,7 @@
                           <tbody id="dynamic_field2">
                             <tr>
                               <td>
-                                <input type="text" id="eye_drops" name="e_name[]"  class="form-control col-md-4 col-xs-4" list="browsers2"placeholder="Name">
+                                <input type="text" id="e_name[]" name="e_name[]"  class="form-control col-md-4 col-xs-4" list="browsers2"placeholder="Name">
                                   <datalist id="browsers2">
                                     <?php
                                       $query = mysqli_query($con, "SELECT * FROM eye_drops WHERE name LIKE '%".$searchTerm."%' ORDER BY name ASC");
@@ -617,16 +830,16 @@
                                   </datalist>
                               </td>
                               <td>
-                                <input type="text" id="time" name="e_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Times">
+                                <input type="text" id="e_time[]" name="e_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Times">
                               </td>
                               <td>
-                                <input type="text" id="duration" name="e_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration">
+                                <input type="text" id="e_duration[]" name="e_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration">
                               </td>
                               <td>
-                                <input type="text" id="drops" name="e_drops[]"  class="form-control col-md-4 col-xs-4" placeholder="Drops">
+                                <input type="text" id="e_drops[]" name="e_drops[]"  class="form-control col-md-4 col-xs-4" placeholder="Drops">
                               </td>
                               <td>
-                                <button type="button" name="add2" id="add2" class="btn btn-success">Add More</button>
+                                <button type="button" id="add2" name="add2" class="btn btn-success">Add More</button>
                               </td>
                             </tr>
                           </tbody>
@@ -637,7 +850,7 @@
 
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button type="submit" name="submit" class="btn btn-success">Preview</button>
+                        <button type="button" id="submit" name="submit" class="btn btn-success">Preview</button>
                       </div>
                     </div>
                   </form>
@@ -653,7 +866,7 @@
 
               $('#add').click(function(){  
                    i++;  
-                   $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" id="medicine" name="m_name[]"  class="form-control col-md-4 col-xs-4"  list="browsers" placeholder="Name"></td><td><input type="text" id="time" name="m_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Time"></td><td><input type="text" id="duration" name="m_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration"></td><td><input type="text" id="pills" name="m_pills[]"  class="form-control col-md-4 col-xs-4" placeholder="Pills"></td><td> <button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+                   $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" id="m_name[]" name="m_name[]"  class="form-control col-md-4 col-xs-4"  list="browsers" placeholder="Name"></td><td><input type="text" id="m_time[]" name="m_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Time"></td><td><input type="text" id="m_duration[]" name="m_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration"></td><td><input type="text" id="m_pills[]" name="m_pills[]"  class="form-control col-md-4 col-xs-4" placeholder="Pills"></td><td> <button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
               });
 
               $(document).on('click', '.btn_remove', function(){  
@@ -666,7 +879,7 @@
 
           <script type="text/javascript">
             $(document).ready(function() {
-              $('#birthday').daterangepicker({
+              $('#datee').daterangepicker({
                 singleDatePicker: true,
                 calender_style: "picker_4"
               }, function(start, end, label) {
@@ -687,13 +900,13 @@
             });
 
             function handleStatusChanged() {
-                $('#toggleElement').on('change', function () {
+                $('#ot').on('change', function () {
                   toggleStatus();   
                 });
             }
 
             function toggleStatus() {
-                if ($('#toggleElement').is(':checked')) {
+                if ($('#ot').is(':checked')) {
                     $('#elementsToOperateOn :input').removeAttr('disabled');
                 } else {
                   $('#elementsToOperateOn :input').attr('disabled', true);  
@@ -714,13 +927,13 @@
             });
 
             function handleStatusChanged2() {
-                $('#toggleElement2').on('change', function () {
+                $('#glasses').on('change', function () {
                   toggleStatus2();   
                 });
             }
 
             function toggleStatus2() {
-                if ($('#toggleElement2').is(':checked')) {
+                if ($('#glasses').is(':checked')) {
                     $('#elementsToOperateOn2 :input').removeAttr('disabled');
                 } else {
                   $('#elementsToOperateOn2 :input').attr('disabled', true);  
@@ -737,7 +950,7 @@
 
               $('#add2').click(function(){  
                    i++;  
-                   $('#dynamic_field2').append('<tr id="row'+i+'"><td><input type="text" id="eye_drops" name="e_name[]"  class="form-control col-md-4 col-xs-4" list="browsers2" placeholder="Name"></td><td><input type="text" id="time" name="e_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Time"></td><td><input type="text" id="duration" name="e_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration"></td><td><input type="text" id="drops" name="e_drops[]"  class="form-control col-md-4 col-xs-4" placeholder="Drops"></td><td> <button type="button" name="remove2" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+                   $('#dynamic_field2').append('<tr id="row'+i+'"><td><input type="text" id="e_name[]" name="e_name[]"  class="form-control col-md-4 col-xs-4" list="browsers2" placeholder="Name"></td><td><input type="text" id="e_time[]" name="e_time[]"  class="form-control col-md-4 col-xs-4" placeholder="Time"></td><td><input type="text" id="e_duration[]" name="e_duration[]"  class="form-control col-md-4 col-xs-4" placeholder="Duration"></td><td><input type="text" id="e_drops[]" name="e_drops[]"  class="form-control col-md-4 col-xs-4" placeholder="Drops"></td><td> <button type="button" name="remove2" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
               });
 
               $(document).on('click', '.btn_remove2', function(){  

@@ -101,7 +101,7 @@ if($email=="")
                 </li>
                 <li><a href="opd.php"><i class="fa fa-edit"></i>OPD Form </a>
                 </li>
-                <li><a href="opd.php"><i class="fa fa-edit"></i>Patient History </a>
+                <li><a href="totalopd.php"><i class="fa fa-edit"></i>Patient History </a>
                 </li>
                 <!-- <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">

@@ -172,13 +172,13 @@ include("config.php");
 if($id  == "")
 {
 	// $query = mysqli_query($con, "insert into opd_details(name, age, sex, address, datee, history, diagnosis, advice, re_vision, le_vision) values ('$name2', '$age2', '$sex2', '$address2', '$datee2', '$history2', '$diagnosis2', '$advice2', '$re_vision2', '$le_vision2')"); //Insert query
-  echo "fisrt block";
+  
 
 	$query = mysqli_query($con, "INSERT INTO opd_details(name, age, sex, address, datee, history, diagnosis, advice, re_vision, le_vision, re_tension, le_tension, re_sac, le_sac, re_fundus, le_fundus, glasses, re_d_s, re_d_c, re_d_a, re_n_s, re_n_c, re_n_a, le_d_s, le_d_c, le_d_a, le_n_s, le_n_c, le_n_a, ot, blood_sugar, blood_pressure, k1, k2, axial_length, iol) values ('$name', '$age', '$sex', '$address', '$datee', '$history', '$diagnosis', '$advice', '$re_vision', '$le_vision', '$re_tension', '$le_tension', '$re_sac', '$le_sac', '$re_fundus', '$le_fundus', '$glasses', '$re_d_s', '$re_d_c', '$re_d_a', '$re_n_s', '$re_n_c', '$re_n_a', '$le_d_s', '$le_d_c', '$le_d_a', '$le_n_s', '$le_n_c', '$le_n_a', '$ot', '$blood_sugar', '$blood_pressure', '$k1', '$k2', '$axial_length', '$iol')");
 
 	if($query)
 	{
-    echo "<script>Super frst block</script>";
+   // echo "<script>Super frst block</script>";
 		$q = mysqli_query($con, "SELECT * FROM opd_details order by id desc limit 1 ");
 		$data = mysqli_fetch_array($q);
 		$opd_details_id = $data['id'];
@@ -245,9 +245,12 @@ else
 		//echo "Data Submitted succesfully";
 	}	
 }
+ $q = mysqli_query($con, "SELECT * FROM opd_details order by id desc limit 1 ");
+              $da = mysqli_fetch_array($q);
+              $a = $da['id'];
+              echo $a;
 
-
-// $q = mysqli_query($connection, "SELECT id FROM form_element ORDER BY id desc LIMIT 1");
+// $q = mysqli_query($con, "SELECT id FROM form_element ORDER BY id desc LIMIT 1");
 // $d = mysqli_fetch_array($q);
 
 // $_SESSION['id'] = $d['id'];

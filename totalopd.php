@@ -24,7 +24,6 @@
 
 
 
-
 <link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -83,7 +82,7 @@
 
 
                       <div class="x_title">
-                        <h2>Today's OPD Details</h2>
+                        <h2>Total OPD Details</h2>
                         <div class="clearfix"></div>
                       </div>
                       <div class="x_content">
@@ -94,8 +93,7 @@
                               <th>Name</th>
                               <th>Address</th>
                               <th>Appointment</th>
-                              <th>Preview</th>
-                              <th>Delete</th>
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -109,15 +107,21 @@
                                 while($row = mysqli_fetch_array($sql))
                                 {
                                   $idd++;
+                                  $idp=$row['id'];
                             ?>
+
                             <tr>
-                              <td><?php echo $idd ?></td>
-                              <td><?php echo $row['name'] ?></td>
-                              <td><?php echo $row['address'] ?></td>
-                              <td><?php echo $row['datee'] ?></td>
-                              <td><button type="button" class="btn btn-primary">Preview</button></td>
-                              <td><?php echo "<a href='totalopd.php?idde=$row[id]'><button class='btn btn-danger'>Delete</button></a>" ?></td>
+                              <td width="10%"><?php echo $idd ?></td>
+                              <td width="20%"><?php echo $row['name'] ?></td>
+                              <td width="40%"><?php echo $row['address'] ?></td>
+                              <td width="10%"><?php echo $row['datee'] ?></td>
+                              <td width="20%">
+                                <button type="button" class="btn btn-round btn-primary" onclick="newDoc(<?php echo $row['id'] ?>)">Preview
+                                </button>
+                              <?php echo "<a href='totalopd.php?idde=$row[id]'><button class='btn btn-round btn-danger'>Delete</button></a>" ?></td>
                             </tr>
+
+                          
 
                             <?php
                               }
@@ -146,10 +150,19 @@
           </script> -->
         </div>
         <!-- /page content -->
+        
+
+<script>
+  function newDoc(a) {
+    console.log(a);
+    window.open("preview.php?a=" + a, "MsgWindow", "width=1100 ,height=750");
+  }
+</script>
 
 <?php
 include("footer.php");
 ?>
+
 
 <!-- Datatables-->
         <script src="js/datatables/jquery.dataTables.min.js"></script>

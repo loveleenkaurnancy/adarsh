@@ -1,6 +1,8 @@
 <?php
 include("config.php");
 session_start();
+
+
 @$email=$_SESSION['email'];
 @$name=$_SESSION['name'];
 if($email=="")
@@ -17,12 +19,20 @@ if($email=="")
 
 	<!-- Bootstrap core CSS -->
 
-  <script src="js/jquery.min.js"></script>
+	<script src="js/jquery.min.js"></script>
 
 	<style type="text/css">
+		@media print
+		{
+			#printPageButton
+			{
+				display: none;
+	  		}
+		}
+	
 		body
 		{
-			font-size: 15px;
+			font-size: 16px;
 		}
 
 		.tcenter
@@ -67,16 +77,24 @@ if($email=="")
 			$query = mysqli_query($con, "SELECT * FROM opd_details order by id desc limit 1");
 			$row = mysqli_fetch_array($query);
 			$opd_details_id = $row['id'];
+			if(isset($_GET['a']))
+			{
+				$opd_details_id = $_GET['a'];
+			}
+			
+
+			$query = mysqli_query($con, "SELECT * FROM opd_details where id = '$opd_details_id' ");
+			$row = mysqli_fetch_array($query);
+			
 			$ot = $row['ot'];
 			$glasses = $row['glasses'];
 		?>
-		<!-- <div class="row"> -->
-			<!-- <div class="col-md-12"> -->
+
 				<!-- Patient Details -->
 				<div class="col-md-6">
 					<b>Patient Details</b><br>
 					<?php 
-						echo "Name : ".$row['name']."<br>"; 
+						echo "Name : ".$row['name']."<br>";
 						echo "Age : ".$row['age']."<br>"; 
 						echo "Sex : ".$row['sex']."<br>";
 						echo "Address : ".$row['address']."<br>"; 
@@ -162,8 +180,6 @@ if($email=="")
 					</table> -->
 				</div>
 				<!-- End Examination -->
-			<!-- </div> -->
-		<!-- </div> -->
 
 			<div class="col-md-12">
 				<b>Diagnosis</b><br>
@@ -175,9 +191,46 @@ if($email=="")
 				<?php echo $row['advice']."<br><br>"; ?> 
 			</div>
 
+			<!-- Eye Drops Prescription -->
+			<div class="col-md-10" style="margin-right: 200px;">
+				<b>Eye Drops</b><br>
+				<table class="table">
+					<tr width="900px">
+						<th width="70%">Name</th>
+						<th>Times</th>
+						<th>Duration</th>
+						<th>Drops</th>
+					</tr>
+
+					<?php
+						$query = mysqli_query($con, "SELECT * FROM prescribed_eye_drops where opd_details_id = '$opd_details_id'");
+						while($row2 = mysqli_fetch_array($query))
+						{
+					?>
+
+					<tr>
+						<td><?php echo $row2['e_name']; ?></td>
+						<td style="text-align: center;"><?php echo $row2['e_time']; ?></td>
+						<td style="text-align: center;"><?php echo $row2['e_duration']; ?></td>
+						<td style="text-align: center;"><?php echo $row2['e_drops']; ?></td>
+					</tr>
+					
+					<?php
+						}
+					?>
+
+				</table>
+			</div>
+			<!-- End Eye Drops Prescription -->
+
+
+			<div class="col-md-12" >
+				<br>	
+			</div>
+
 
 			<!-- Medicine Prescription -->
-			<div class="col-md-8" style="margin-right: 200px;">
+			<div class="col-md-10" style="margin-right: 200px;">
 				<b>Medicine</b><br>
 				<table class="table">
 					<tr>
@@ -189,15 +242,15 @@ if($email=="")
 
 					<?php
 						$query = mysqli_query($con, "SELECT * FROM prescribed_medicine where opd_details_id = '$opd_details_id'");
-						while($row = mysqli_fetch_array($query))
+						while($row3 = mysqli_fetch_array($query))
 						{
 					?>
 
 					<tr>
-						<td><?php echo $row['m_name']; ?></td>
-						<td style="text-align: center;"><?php echo $row['m_time']; ?></td>
-						<td style="text-align: center;"><?php echo $row['m_duration']; ?></td>
-						<td style="text-align: center;"><?php echo $row['m_pills']; ?></td>
+						<td><?php echo $row3['m_name']; ?></td>
+						<td style="text-align: center;"><?php echo $row3['m_time']; ?></td>
+						<td style="text-align: center;"><?php echo $row3['m_duration']; ?></td>
+						<td style="text-align: center;"><?php echo $row3['m_pills']; ?></td>
 					</tr>
 					
 					<?php
@@ -207,101 +260,6 @@ if($email=="")
 				</table>
 			</div>
 			<!-- End Medicine Prescription -->
-
-			<div class="col-md-12" >
-				<br>	
-			</div>
-
-			<!-- Eye Drops Prescription -->
-			<div class="col-md-8" style="margin-right: 200px;">
-				<b>Eye Drops</b><br>
-				<table class="table">
-					<tr>
-						<th width="70%">Name</th>
-						<th>Times</th>
-						<th>Duration</th>
-						<th>Drops</th>
-					</tr>
-
-					<?php
-						$query = mysqli_query($con, "SELECT * FROM prescribed_eye_drops where opd_details_id = '$opd_details_id'");
-						while($row = mysqli_fetch_array($query))
-						{
-					?>
-
-					<tr>
-						<td><?php echo $row['e_name']; ?></td>
-						<td style="text-align: center;"><?php echo $row['e_time']; ?></td>
-						<td style="text-align: center;"><?php echo $row['e_duration']; ?></td>
-						<td style="text-align: center;"><?php echo $row['e_drops']; ?></td>
-					</tr>
-					
-					<?php
-						}
-					?>
-
-				</table>
-			</div>
-			<!-- End Eye Drops Prescription -->
-
-			<div class="col-md-12">
-				<br>	
-			</div>
-
-			<?php
-			if($glasses == "")
-			{
-
-			}
-			else
-			{
-			?>
-			<!-- Glasses -->
-			<div class="col-md-8" style="width: 400px">
-				<b>Glasses</b><br>
-				<?php
-					$query = mysqli_query($con, "SELECT * FROM opd_details order by id desc limit 1");
-					$row = mysqli_fetch_array($query);
-				?>
-				<table class="table" style="text-align: center;">
-					<tr>
-						<th></th>
-						<th colspan="3" class="tcenter">Right</th>
-						<th colspan="3" class="tcenter">Left</th>
-					</tr>
-					<tr>
-						<td></td>
-						<th>Sph</th>
-						<th>Cyl</td>
-						<th>Axis</th>
-						<th>Sph</th>
-						<th>Cyl</th>
-						<th>Axis</th>
-					</tr>
-					<tr>
-						<th>Distance</th>
-						<td><?php echo $row['re_d_s']; ?></td>
-						<td><?php echo $row['re_d_c']; ?></td>
-						<td><?php echo $row['re_d_a']; ?></td>
-						<td><?php echo $row['le_d_s']; ?></td>
-						<td><?php echo $row['le_d_c']; ?></td>
-						<td><?php echo $row['le_d_a']; ?></td>
-					</tr>
-					<tr>
-						<th>Near</th>
-						<td><?php echo $row['re_n_s']; ?></td>
-						<td><?php echo $row['re_n_c']; ?></td>
-						<td><?php echo $row['re_n_a']; ?></td>
-						<td><?php echo $row['le_n_s']; ?></td>
-						<td><?php echo $row['le_n_c']; ?></td>
-						<td><?php echo $row['le_n_a']; ?></td>
-					</tr>
-				</table>
-			</div>
-			<!-- End Glasses -->
-			<?php
-			}
-			?>
 			
 			
 			<div class="col-md-12">
@@ -318,8 +276,12 @@ if($email=="")
 			?>
 
 			<!-- OT Purposes -->
-			<div class="col-md-8">
+			<div class="col-md-10">
 				<b>Operation Details</b><br>
+				<?php
+					// $query = mysqli_query($con, "SELECT * FROM opd_details order by id desc limit 1");
+					// $row = mysqli_fetch_array($query);
+				?>
 				<table class="table" style="border-color: white; text-align: center;">
 					<tr>
 						<th>Blood Sugar</th>
@@ -327,7 +289,7 @@ if($email=="")
 						<th>K1</th>
 						<th>K2</th>
 						<th>Axial Length</th>
-						<th>Iol1</th>
+						<th>Intraocular Lens</th>
 					</tr>
 					<tr>
 						<td><?php echo $row['blood_sugar']; ?></td>
@@ -369,22 +331,78 @@ if($email=="")
 			<?php
 			}
 			?>
+			
+
+			<div class="col-md-12">
+				<br>	
+			</div>
+
+			<?php
+			if($glasses == "")
+			{
+
+			}
+			else
+			{
+			?>
+			<!-- Glasses -->
+			<div class="col-md-10" style="width: 400px">
+				<b>Glasses</b><br>
+				<table class="table" style="text-align: center;">
+					<tr>
+						<th></th>
+						<th colspan="3" class="tcenter">Right</th>
+						<th colspan="3" class="tcenter">Left</th>
+					</tr>
+					<tr>
+						<td></td>
+						<th>Sph</th>
+						<th>Cyl</td>
+						<th>Axis</th>
+						<th>Sph</th>
+						<th>Cyl</th>
+						<th>Axis</th>
+					</tr>
+					<tr>
+						<th>Distance</th>
+						<td><?php echo $row['re_d_s']; ?></td>
+						<td><?php echo $row['re_d_c']; ?></td>
+						<td><?php echo $row['re_d_a']; ?></td>
+						<td><?php echo $row['le_d_s']; ?></td>
+						<td><?php echo $row['le_d_c']; ?></td>
+						<td><?php echo $row['le_d_a']; ?></td>
+					</tr>
+					<tr>
+						<th>Near</th>
+						<td><?php echo $row['re_n_s']; ?></td>
+						<td><?php echo $row['re_n_c']; ?></td>
+						<td><?php echo $row['re_n_a']; ?></td>
+						<td><?php echo $row['le_n_s']; ?></td>
+						<td><?php echo $row['le_n_c']; ?></td>
+						<td><?php echo $row['le_n_a']; ?></td>
+					</tr>
+				</table>
+			</div>
+			<!-- End Glasses -->
+			<?php
+			}
+			?>
+			
+			
+			
 
 
 			<div class="col-md-12" style="text-align: right;">
 				<br><br>
-				<button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> <b>Signature</b></button>
-			
+				<b>Signature</b>
 			</div>
 
-		<!-- 	<div class="row no-print">
-                      <div class="col-xs-12">
-                        <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button>
-                        
-                      </div>
-                    </div> -->
-
+			<div id="printPageButton" class="col-md-12" style="text-align: right;">
+				<br><br>
+				<button class="btn btn-danger" onclick="window.close();"><i class="fa fa-print"></i> <b>Back</b> </button>&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-success" onclick="window.print();"><i class="fa fa-print"></i> <b>PRINT</b> </button>
+				<br><br><br><br>
+			</div>
 		</div>
-
 </body>
 </html>
